@@ -9,6 +9,9 @@ import key from "../../key";
 import mapStyles from "./mapStyles.json";
 import { markersData, susolvkaCoords } from "../../fakeData";
 
+import { connect } from "react-redux";
+import { getMuseums } from "../../actions/markers";
+
 import MapWrapper from "./MapWrapper";
 
 const MAP = {
@@ -29,6 +32,11 @@ export class GoogleMap extends React.PureComponent {
     },
     clusters: []
   };
+
+  componentDidMount() {
+    console.log("start didMount");
+    this.props.getMuseums();
+  }
 
   getClusters = () => {
     const clusters = supercluster(markersData, {
@@ -78,7 +86,7 @@ export class GoogleMap extends React.PureComponent {
           options={MAP.options}
           onChange={this.handleMapChange}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: key }}
+          bootstrapURLKeys={{ key: "key" }}
         >
           {this.state.clusters.map(item => {
             if (item.numPoints === 1) {
@@ -106,4 +114,12 @@ export class GoogleMap extends React.PureComponent {
   }
 }
 
-export default GoogleMap;
+// export default GoogleMap;
+
+const mapStateToProps = state => {
+  return {
+    museums: state.museums
+  };
+};
+
+export default connect(mapStateToProps, { getMuseums })(GoogleMap);

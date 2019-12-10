@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 
-import GoogleMap from './components/GoogleMap';
+import GoogleMap from "./components/GoogleMap";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <GoogleMap />
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <GoogleMap />
+        </div>
+      </Provider>
     );
   }
 }
