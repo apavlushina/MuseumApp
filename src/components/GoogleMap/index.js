@@ -4,6 +4,7 @@ import supercluster from "points-cluster";
 
 import Marker from "../Marker";
 import ClusterMarker from "../ClusterMarker";
+import key from "../../key";
 
 import mapStyles from "./mapStyles.json";
 import { markersData, susolvkaCoords } from "../../fakeData";
@@ -77,7 +78,7 @@ export class GoogleMap extends React.PureComponent {
           options={MAP.options}
           onChange={this.handleMapChange}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: "AIzaSyDGFnM96_tYeUPnbALleDp7x8W_NSG5PKE" }}
+          bootstrapURLKeys={{ key: key }}
         >
           {this.state.clusters.map(item => {
             if (item.numPoints === 1) {
