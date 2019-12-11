@@ -11,12 +11,13 @@ export function setMuseums(museums) {
   };
 }
 
+const baseUrl = "http://localhost:4000";
+
 export const getMuseums = () => (dispatch, getState) => {
   const state = getState();
   const { museums } = state;
-
   if (!museums.length) {
-    request("../museums.json")
+    request(`${baseUrl}/museums`)
       .then(response => {
         const action = setMuseums(response.body);
 

@@ -1,3 +1,6 @@
+import request from "superagent";
+import initState from "./museums.json";
+
 export const susolvkaCoords = { lat: 52.283449, lng: 5.162265 };
 
 // export const markersData = [
@@ -35,3 +38,14 @@ export const markersData = [...Array(TOTAL_COUNT)]
         Math.cos((50 * Math.PI * index) / 180) +
       Math.sin((5 * index) / 180)
   }));
+
+// export const markersData = initState.d.map((museum, index) => ({
+//   id: museum.Id,
+//   title: museum.SubTitle,
+//   lat: request(
+//     `https://nominatim.openstreetmap.org/search?q==${museum.SubTitle}%20${museum.Title}%20Nederlands&format=json`
+//   ).then(response => console.log("response", response.body[0].lat)),
+//   lng: request(
+//     `https://nominatim.openstreetmap.org/search?q==${museum.SubTitle}%20${museum.Title}%20Nederlands&format=json`
+//   ).then(response => response.body[0].lon)
+// }));
