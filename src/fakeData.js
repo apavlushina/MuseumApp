@@ -1,5 +1,5 @@
 import request from "superagent";
-import initState from "./museums.json";
+// import initState from "./museums.json";
 
 export const susolvkaCoords = { lat: 52.283449, lng: 5.162265 };
 

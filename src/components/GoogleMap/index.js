@@ -36,30 +36,36 @@ export class GoogleMap extends React.PureComponent {
   componentDidMount() {
     console.log("start didMount");
     this.props.getMuseums();
+    console.log("do we have state?", this.props.museums);
   }
 
   getClusters = () => {
-    const clusters = supercluster(markersData, {
-      minZoom: 0,
-      maxZoom: 16,
-      radius: 60
-    });
+    if (this.props.museums) {
+      console.log(this.props.museums, this.props.museums);
+      const clusters = supercluster(this.props.museums, {
+        minZoom: 0,
+        maxZoom: 16,
+        radius: 60
+      });
 
-    return clusters(this.state.mapOptions);
+      return clusters(this.state.mapOptions);
+    }
   };
 
   createClusters = props => {
-    this.setState({
-      clusters: this.state.mapOptions.bounds
-        ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
-            lat: wy,
-            lng: wx,
-            numPoints,
-            id: `${numPoints}_${points[0].id}`,
-            points
-          }))
-        : []
-    });
+    if (this.props.museums) {
+      this.setState({
+        clusters: this.state.mapOptions.bounds
+          ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
+              lat: wy,
+              lng: wx,
+              numPoints,
+              id: `${numPoints}_${points[0].id}`,
+              points
+            }))
+          : []
+      });
+    }
   };
 
   handleMapChange = ({ center, zoom, bounds }) => {
@@ -86,7 +92,7 @@ export class GoogleMap extends React.PureComponent {
           options={MAP.options}
           onChange={this.handleMapChange}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: "key" }}
+          bootstrapURLKeys={{ key: key }}
         >
           {this.state.clusters.map(item => {
             if (item.numPoints === 1) {
@@ -118,7 +124,7 @@ export class GoogleMap extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    museums: state.museums
+    museums: state.museums.museums
   };
 };
 

@@ -17,8 +17,10 @@ export const getMuseums = () => (dispatch, getState) => {
   const state = getState();
   const { museums } = state;
   if (!museums.length) {
+    console.log("start fetch");
     request(`${baseUrl}/museums`)
       .then(response => {
+        console.log("response", response);
         const action = setMuseums(response.body);
 
         dispatch(action);
