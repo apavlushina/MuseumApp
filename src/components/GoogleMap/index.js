@@ -31,7 +31,8 @@ export class GoogleMap extends React.PureComponent {
       center: MAP.defaultCenter,
       zoom: MAP.defaultZoom
     },
-    clusters: []
+    clusters: [],
+    key: null
   };
 
   componentDidMount() {
@@ -59,7 +60,7 @@ export class GoogleMap extends React.PureComponent {
               lat: wy,
               lng: wx,
               numPoints,
-              id: `${numPoints}_${points[0].id}`,
+              id: points[0].id,
               points
             }))
           : []
@@ -83,10 +84,7 @@ export class GoogleMap extends React.PureComponent {
   };
 
   onChildClickCallback = key => {
-    console.log("key", key.slice(2));
-    this.props.setMuseum(key.slice(2));
-    this.setState({ key: key.slice(2) });
-    console.log("my Key", this.state.key);
+    this.setState({ key: Number(key) });
   };
 
   render() {
@@ -111,9 +109,9 @@ export class GoogleMap extends React.PureComponent {
                   lng={item.points[0].lng}
                   title={item.points[0].title}
                   city={item.points[0].city}
-                  // idOne={this.state.key}
-                  // idTwo={this.props.museum && this.props.museum.id}
-                  museum={this.props.museum}
+                  selectedKey={this.state.key}
+                  museumId={item.id}
+                  museums={this.props.museums}
                 />
               );
             }
@@ -137,8 +135,8 @@ export class GoogleMap extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    museums: state.museums.museums,
-    museum: state.museum.museum
+    museums: state.museums,
+    museum: state.museum
   };
 };
 

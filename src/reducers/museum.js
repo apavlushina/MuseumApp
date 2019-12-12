@@ -4,7 +4,7 @@ export default (state = "", action) => {
   console.log("payload", action);
   switch (action.type) {
     case SET_MUSEUM:
-      return action.payload;
+      return action.payload.museum;
     default:
       return state;
   }

@@ -14,19 +14,15 @@ export function setMuseums(museums) {
 const baseUrl = "http://localhost:4000";
 
 export const getMuseums = () => (dispatch, getState) => {
-  const state = getState();
-  const { museums } = state;
-  if (!museums.length) {
-    console.log("start fetch");
-    request(`${baseUrl}/museums`)
-      .then(response => {
-        console.log("response", response);
-        const action = setMuseums(response.body);
+  console.log("start fetch");
+  request(`${baseUrl}/museums`)
+    .then(response => {
+      console.log("response", response);
+      const action = setMuseums(response.body);
 
-        dispatch(action);
-      })
-      .catch(console.error);
-  }
+      dispatch(action);
+    })
+    .catch(console.error);
 };
 
 export const SET_MUSEUM = "SET_MUSEUM";
