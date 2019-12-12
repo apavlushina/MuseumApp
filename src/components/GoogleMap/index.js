@@ -40,7 +40,6 @@ export class GoogleMap extends React.PureComponent {
   }
 
   getClusters = (museums = []) => {
-    debugger;
     const clusters = supercluster(museums, {
       minZoom: 0,
       maxZoom: 16
@@ -109,7 +108,7 @@ export class GoogleMap extends React.PureComponent {
           onChange={this.handleMapChange}
           onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: key }}
+          bootstrapURLKeys={{ key: "key" }}
         >
           {clusters.map(item => {
             if (item.numPoints === 1) {

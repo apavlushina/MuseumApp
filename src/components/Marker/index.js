@@ -14,10 +14,9 @@ class Marker extends React.PureComponent {
   };
 
   render() {
-    // debugger;
-    const museum =
-      this.props.museums.find(museum => museum.id == this.props.selectedKey) ||
-      {};
+    const museum = this.props.museums
+      ? this.props.museums.find(museum => museum.id == this.props.selectedKey)
+      : {};
 
     const isSelected = this.props.selectedKey == this.props.museumId;
 
