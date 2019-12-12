@@ -39,34 +39,32 @@ export class GoogleMap extends React.PureComponent {
     this.props.getMuseums();
   }
 
-  getClusters = () => {
-    if (this.props.museums) {
-      console.log(this.props.museums, this.props.museums);
-      const clusters = supercluster(this.props.museums, {
-        minZoom: 0,
-        maxZoom: 16,
-        radius: 60
-      });
+  getClusters = (museums = []) => {
+    debugger;
+    const clusters = supercluster(museums, {
+      minZoom: 0,
+      maxZoom: 16
+      // radius: 60
+    });
 
-      return clusters(this.state.mapOptions);
-    }
+    return clusters(this.state.mapOptions);
   };
 
-  createClusters = props => {
-    if (this.props.museums) {
-      this.setState({
-        clusters: this.state.mapOptions.bounds
-          ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
-              lat: wy,
-              lng: wx,
-              numPoints,
-              id: points[0].id,
-              points
-            }))
-          : []
-      });
-    }
-  };
+  // createClusters = props => {
+  //   if (this.props.museums) {
+  //     this.setState({
+  //       clusters: this.state.mapOptions.bounds
+  //         ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
+  //             lat: wy,
+  //             lng: wx,
+  //             numPoints,
+  //             id: points[0].id,
+  //             points
+  //           }))
+  //         : []
+  //     });
+  //   }
+  // };
 
   handleMapChange = ({ center, zoom, bounds }) => {
     this.setState(
@@ -76,10 +74,10 @@ export class GoogleMap extends React.PureComponent {
           zoom,
           bounds
         }
-      },
-      () => {
-        this.createClusters(this.props);
       }
+      // () => {
+      //   this.createClusters(this.props);
+      // }
     );
   };
 
@@ -88,7 +86,20 @@ export class GoogleMap extends React.PureComponent {
   };
 
   render() {
-    console.log("do we have museum?", this.props.museum);
+    const clusters = this.state.mapOptions.bounds
+      ? this.getClusters(this.props.museums).map(
+          ({ wx, wy, numPoints, points }) => ({
+            lat: wy,
+            lng: wx,
+            numPoints,
+            id: points[0].id,
+            points
+          })
+        )
+      : [];
+
+    console.log("clusters", clusters);
+
     return (
       <MapWrapper>
         <GoogleMapReact
@@ -100,7 +111,7 @@ export class GoogleMap extends React.PureComponent {
           yesIWantToUseGoogleMapApiInternals
           bootstrapURLKeys={{ key: key }}
         >
-          {this.state.clusters.map(item => {
+          {clusters.map(item => {
             if (item.numPoints === 1) {
               return (
                 <Marker
@@ -135,8 +146,7 @@ export class GoogleMap extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    museums: state.museums,
-    museum: state.museum
+    museums: state.museums
   };
 };
 
