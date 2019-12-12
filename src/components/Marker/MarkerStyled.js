@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import { COLORS, easyMove } from '../../style-constants';
+import styled from "styled-components";
+import { COLORS, easyMove } from "../../style-constants";
 
 const MarkerStyled = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

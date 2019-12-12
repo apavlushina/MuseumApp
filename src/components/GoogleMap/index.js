@@ -10,9 +10,10 @@ import mapStyles from "./mapStyles.json";
 import { markersData, susolvkaCoords } from "../../fakeData";
 
 import { connect } from "react-redux";
-import { getMuseums } from "../../actions/markers";
+import { getMuseums, setMuseum } from "../../actions/markers";
 
 import MapWrapper from "./MapWrapper";
+import { stat } from "fs";
 
 const MAP = {
   defaultZoom: 8,
@@ -30,43 +31,39 @@ export class GoogleMap extends React.PureComponent {
       center: MAP.defaultCenter,
       zoom: MAP.defaultZoom
     },
-    clusters: []
+    clusters: [],
+    key: null
   };
 
   componentDidMount() {
-    console.log("start didMount");
     this.props.getMuseums();
-    console.log("do we have state?", this.props.museums);
   }
 
-  getClusters = () => {
-    if (this.props.museums) {
-      console.log(this.props.museums, this.props.museums);
-      const clusters = supercluster(this.props.museums, {
-        minZoom: 0,
-        maxZoom: 16,
-        radius: 60
-      });
+  getClusters = (museums = []) => {
+    const clusters = supercluster(museums, {
+      minZoom: 0,
+      maxZoom: 16
+      // radius: 60
+    });
 
-      return clusters(this.state.mapOptions);
-    }
+    return clusters(this.state.mapOptions);
   };
 
-  createClusters = props => {
-    if (this.props.museums) {
-      this.setState({
-        clusters: this.state.mapOptions.bounds
-          ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
-              lat: wy,
-              lng: wx,
-              numPoints,
-              id: `${numPoints}_${points[0].id}`,
-              points
-            }))
-          : []
-      });
-    }
-  };
+  // createClusters = props => {
+  //   if (this.props.museums) {
+  //     this.setState({
+  //       clusters: this.state.mapOptions.bounds
+  //         ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
+  //             lat: wy,
+  //             lng: wx,
+  //             numPoints,
+  //             id: points[0].id,
+  //             points
+  //           }))
+  //         : []
+  //     });
+  //   }
+  // };
 
   handleMapChange = ({ center, zoom, bounds }) => {
     this.setState(
@@ -76,14 +73,32 @@ export class GoogleMap extends React.PureComponent {
           zoom,
           bounds
         }
-      },
-      () => {
-        this.createClusters(this.props);
       }
+      // () => {
+      //   this.createClusters(this.props);
+      // }
     );
   };
 
+  onChildClickCallback = key => {
+    this.setState({ key: Number(key) });
+  };
+
   render() {
+    const clusters = this.state.mapOptions.bounds
+      ? this.getClusters(this.props.museums).map(
+          ({ wx, wy, numPoints, points }) => ({
+            lat: wy,
+            lng: wx,
+            numPoints,
+            id: points[0].id,
+            points
+          })
+        )
+      : [];
+
+    console.log("clusters", clusters);
+
     return (
       <MapWrapper>
         <GoogleMapReact
@@ -91,16 +106,22 @@ export class GoogleMap extends React.PureComponent {
           defaultCenter={MAP.defaultCenter}
           options={MAP.options}
           onChange={this.handleMapChange}
+          onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: key }}
+          bootstrapURLKeys={{ key: "key" }}
         >
-          {this.state.clusters.map(item => {
+          {clusters.map(item => {
             if (item.numPoints === 1) {
               return (
                 <Marker
                   key={item.id}
                   lat={item.points[0].lat}
                   lng={item.points[0].lng}
+                  title={item.points[0].title}
+                  city={item.points[0].city}
+                  selectedKey={this.state.key}
+                  museumId={item.id}
+                  museums={this.props.museums}
                 />
               );
             }
@@ -124,8 +145,8 @@ export class GoogleMap extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    museums: state.museums.museums
+    museums: state.museums
   };
 };
 
-export default connect(mapStateToProps, { getMuseums })(GoogleMap);
+export default connect(mapStateToProps, { getMuseums, setMuseum })(GoogleMap);
