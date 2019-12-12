@@ -28,3 +28,24 @@ export const getMuseums = () => (dispatch, getState) => {
       .catch(console.error);
   }
 };
+
+export const SET_MUSEUM = "SET_MUSEUM";
+
+export function updMuseum(museum) {
+  return {
+    type: SET_MUSEUM,
+    payload: {
+      museum
+    }
+  };
+}
+
+export const setMuseum = key => dispatch => {
+  request(`${baseUrl}/museums/${key}`)
+    .then(response => {
+      const action = updMuseum(response.body);
+
+      dispatch(action);
+    })
+    .catch(console.error);
+};

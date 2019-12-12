@@ -10,9 +10,10 @@ import mapStyles from "./mapStyles.json";
 import { markersData, susolvkaCoords } from "../../fakeData";
 
 import { connect } from "react-redux";
-import { getMuseums } from "../../actions/markers";
+import { getMuseums, setMuseum } from "../../actions/markers";
 
 import MapWrapper from "./MapWrapper";
+import { stat } from "fs";
 
 const MAP = {
   defaultZoom: 8,
@@ -34,9 +35,7 @@ export class GoogleMap extends React.PureComponent {
   };
 
   componentDidMount() {
-    console.log("start didMount");
     this.props.getMuseums();
-    console.log("do we have state?", this.props.museums);
   }
 
   getClusters = () => {
@@ -83,7 +82,15 @@ export class GoogleMap extends React.PureComponent {
     );
   };
 
+  onChildClickCallback = key => {
+    console.log("key", key.slice(2));
+    this.props.setMuseum(key.slice(2));
+    this.setState({ key: key.slice(2) });
+    console.log("my Key", this.state.key);
+  };
+
   render() {
+    console.log("do we have museum?", this.props.museum);
     return (
       <MapWrapper>
         <GoogleMapReact
@@ -91,6 +98,7 @@ export class GoogleMap extends React.PureComponent {
           defaultCenter={MAP.defaultCenter}
           options={MAP.options}
           onChange={this.handleMapChange}
+          onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
           bootstrapURLKeys={{ key: key }}
         >
@@ -101,6 +109,11 @@ export class GoogleMap extends React.PureComponent {
                   key={item.id}
                   lat={item.points[0].lat}
                   lng={item.points[0].lng}
+                  title={item.points[0].title}
+                  city={item.points[0].city}
+                  // idOne={this.state.key}
+                  // idTwo={this.props.museum && this.props.museum.id}
+                  museum={this.props.museum}
                 />
               );
             }
@@ -124,8 +137,9 @@ export class GoogleMap extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    museums: state.museums.museums
+    museums: state.museums.museums,
+    museum: state.museum.museum
   };
 };
 
-export default connect(mapStateToProps, { getMuseums })(GoogleMap);
+export default connect(mapStateToProps, { getMuseums, setMuseum })(GoogleMap);
