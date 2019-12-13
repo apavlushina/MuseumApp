@@ -2,7 +2,7 @@
 
 **You can check all available museums you can visit for free with [museumkaart.nl](https://www.museumkaart.nl/MijnMuseumkaart#)**
 
-# Setup
+## Setup
 
 1.  Clone the `museum-app` repository:
 
@@ -26,14 +26,14 @@
 
 - ### User can click the marker and see museum's name
 
-# Front-end Technologies Used
+## Front-end Technologies Used
 
-### [styled-components](https://www.styled-components.com/) , for styling
+#### [styled-components](https://www.styled-components.com/) , for styling
 
-### [google-map-react](https://github.com/google-map-react/google-map-react) , for map
+#### [google-map-react](https://github.com/google-map-react/google-map-react) , for map
 
-### [superclaster](https://github.com/Tim152/clustering-google-map-react) , for markers clustering
+#### [superclaster](https://github.com/Tim152/clustering-google-map-react) , for markers clustering
 
-# For server setup and app installation instructions, see the server repository
+## For server setup and app installation instructions, see the server repository
 
 https://github.com/apavlushina/MuseumAPP-server/tree/master
