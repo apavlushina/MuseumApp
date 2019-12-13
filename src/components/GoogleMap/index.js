@@ -25,7 +25,6 @@ const MAP = {
 };
 
 export class GoogleMap extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
   state = {
     mapOptions: {
       center: MAP.defaultCenter,
@@ -49,35 +48,14 @@ export class GoogleMap extends React.PureComponent {
     return clusters(this.state.mapOptions);
   };
 
-  // createClusters = props => {
-  //   if (this.props.museums) {
-  //     this.setState({
-  //       clusters: this.state.mapOptions.bounds
-  //         ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
-  //             lat: wy,
-  //             lng: wx,
-  //             numPoints,
-  //             id: points[0].id,
-  //             points
-  //           }))
-  //         : []
-  //     });
-  //   }
-  // };
-
   handleMapChange = ({ center, zoom, bounds }) => {
-    this.setState(
-      {
-        mapOptions: {
-          center,
-          zoom,
-          bounds
-        }
+    this.setState({
+      mapOptions: {
+        center,
+        zoom,
+        bounds
       }
-      // () => {
-      //   this.createClusters(this.props);
-      // }
-    );
+    });
   };
 
   onChildClickCallback = key => {
@@ -109,7 +87,7 @@ export class GoogleMap extends React.PureComponent {
           onChange={this.handleMapChange}
           onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: "key" }}
+          bootstrapURLKeys={{ key: key }}
         >
           {clusters.map(item => {
             if (item.numPoints === 1) {
