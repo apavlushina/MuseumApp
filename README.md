@@ -38,6 +38,8 @@
 
 #### [superclaster](https://github.com/Tim152/clustering-google-map-react) , for markers clustering
 
+#### And Google-Maps API and Google-Geocode API
+
 ## For server setup and app installation instructions, see the server repository
 
 https://github.com/apavlushina/MuseumAPP-server/tree/master
