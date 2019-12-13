@@ -16,7 +16,7 @@
 
 5.  Your client is running!
 
-6. You can use broken map by default or you can recieve Google-Map-API key [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+6.  You can use broken map by default or you can recieve Google-Map-API key [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 ---
 
@@ -24,7 +24,7 @@
 
 - ### User can see a map with all museum-markers in cluster
 
-![All museums]()
+![All museums]("../../../public/fullscreen.png")
 
 - ### User can click the marker and see museum's name
 
