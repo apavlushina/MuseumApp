@@ -24,7 +24,11 @@
 
 - ### User can see a map with all museum-markers in cluster
 
+![All museums]()
+
 - ### User can click the marker and see museum's name
+
+![Marker with info window]()
 
 ## Front-end Technologies Used
 
