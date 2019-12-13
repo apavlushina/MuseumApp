@@ -1,6 +1,6 @@
 # The Museum APP
 
-**You can check all available museums you can visit for free with [museumkaart.nl](https://www.museumkaart.nl/MijnMuseumkaart#)**
+**You can see on the map all available museums you can visit for free with [museumkaart.nl](https://www.museumkaart.nl/MijnMuseumkaart#)**
 
 ## Setup
 
