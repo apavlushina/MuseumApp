@@ -7,13 +7,13 @@ import ClusterMarker from "../ClusterMarker";
 import key from "../../key";
 
 import mapStyles from "./mapStyles.json";
-import { markersData, susolvkaCoords } from "../../fakeData";
+import { susolvkaCoords } from "../../fakeData";
 
 import { connect } from "react-redux";
 import { getMuseums, setMuseum } from "../../actions/markers";
 
 import MapWrapper from "./MapWrapper";
-import { stat } from "fs";
+import MyHeader from "./MyHeader";
 
 const MAP = {
   defaultZoom: 8,
@@ -101,6 +101,7 @@ export class GoogleMap extends React.PureComponent {
 
     return (
       <MapWrapper>
+        <MyHeader>museum/kaart\nl on the map</MyHeader>
         <GoogleMapReact
           defaultZoom={MAP.defaultZoom}
           defaultCenter={MAP.defaultCenter}

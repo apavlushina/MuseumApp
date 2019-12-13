@@ -5,7 +5,6 @@ import InfoWindow from "../InfoWindow/index";
 import MarkerStyled from "./MarkerStyled";
 import MarkerInGroupStyled from "./MarkerInGroupStyled";
 import Icon from "../Icon";
-import museums from "../../reducers/museums";
 
 class Marker extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -15,10 +14,10 @@ class Marker extends React.PureComponent {
 
   render() {
     const museum = this.props.museums
-      ? this.props.museums.find(museum => museum.id == this.props.selectedKey)
+      ? this.props.museums.find(museum => museum.id === this.props.selectedKey)
       : {};
 
-    const isSelected = this.props.selectedKey == this.props.museumId;
+    const isSelected = this.props.selectedKey === this.props.museumId;
 
     return (
       <div>
