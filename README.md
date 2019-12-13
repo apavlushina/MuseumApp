@@ -24,11 +24,11 @@
 
 - ### User can see a map with all museum-markers in cluster
 
-![All museums]()
+![All museums](https://i.ibb.co/nn7Kh6F/full-screen.png)
 
 - ### User can click the marker and see museum's name
 
-![Marker with info window]()
+![Marker with info window](https://i.ibb.co/ZMLKpbm/one-Museum.png)
 
 ## Front-end Technologies Used
 
