@@ -24,6 +24,8 @@ const MAP = {
   }
 };
 
+const key = process.env.MAP_API;
+
 export class GoogleMap extends React.PureComponent {
   state = {
     mapOptions: {
@@ -31,7 +33,7 @@ export class GoogleMap extends React.PureComponent {
       zoom: MAP.defaultZoom
     },
     clusters: [],
-    key: process.env.MAP_API
+    key: null
   };
 
   componentDidMount() {
@@ -58,15 +60,12 @@ export class GoogleMap extends React.PureComponent {
     });
   };
 
-  // onChildClickCallback = key => {
-  //   this.setState({ key: Number(key)});
-  // };
-
-  onChildClickCallback = () => {
-    this.setState({ key: process.env.MAP_API });
+  onChildClickCallback = key => {
+    this.setState({ key: Number(key) });
   };
 
   render() {
+    console.log("key", key);
     const clusters = this.state.mapOptions.bounds
       ? this.getClusters(this.props.museums).map(
           ({ wx, wy, numPoints, points }) => ({
@@ -91,7 +90,7 @@ export class GoogleMap extends React.PureComponent {
           onChange={this.handleMapChange}
           onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: process.env.MAP_API }}
+          bootstrapURLKeys={{ key: key }}
         >
           {clusters.map(item => {
             if (item.numPoints === 1) {
