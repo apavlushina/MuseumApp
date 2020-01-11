@@ -58,8 +58,12 @@ export class GoogleMap extends React.PureComponent {
     });
   };
 
-  onChildClickCallback = key => {
-    this.setState({ key: Number(key) || process.env.MAP_API });
+  // onChildClickCallback = key => {
+  //   this.setState({ key: Number(key)});
+  // };
+
+  onChildClickCallback = () => {
+    this.setState({ key: process.env.MAP_API });
   };
 
   render() {
