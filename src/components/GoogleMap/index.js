@@ -4,7 +4,7 @@ import supercluster from "points-cluster";
 
 import Marker from "../Marker";
 import ClusterMarker from "../ClusterMarker";
-import key from "../../key";
+// import key from "../../key";
 
 import mapStyles from "./mapStyles.json";
 import { susolvkaCoords } from "../../fakeData";
