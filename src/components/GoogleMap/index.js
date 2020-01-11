@@ -24,7 +24,7 @@ const MAP = {
   }
 };
 
-const key = process.env.MAP_API;
+const key = process.env.REACT_APP_MAP_API;
 
 export class GoogleMap extends React.PureComponent {
   state = {
@@ -65,7 +65,6 @@ export class GoogleMap extends React.PureComponent {
   };
 
   render() {
-    console.log("key", key);
     const clusters = this.state.mapOptions.bounds
       ? this.getClusters(this.props.museums).map(
           ({ wx, wy, numPoints, points }) => ({
@@ -77,8 +76,6 @@ export class GoogleMap extends React.PureComponent {
           })
         )
       : [];
-
-    console.log("clusters", clusters);
 
     return (
       <MapWrapper>
