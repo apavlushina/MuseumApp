@@ -31,7 +31,7 @@ export class GoogleMap extends React.PureComponent {
       zoom: MAP.defaultZoom
     },
     clusters: [],
-    key: null
+    key: process.env.MAP_API
   };
 
   componentDidMount() {
@@ -91,7 +91,7 @@ export class GoogleMap extends React.PureComponent {
           onChange={this.handleMapChange}
           onChildClick={this.onChildClickCallback}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: key }}
+          bootstrapURLKeys={{ key: process.env.MAP_API }}
         >
           {clusters.map(item => {
             if (item.numPoints === 1) {
