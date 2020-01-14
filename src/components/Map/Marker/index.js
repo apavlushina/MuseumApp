@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import InfoWindow from "../InfoWindow/index";
 import MarkerStyled from "./MarkerStyled";
 import MarkerInGroupStyled from "./MarkerInGroupStyled";
-import Icon from "../Icon";
+import Icon from "../../Icon";
 
 class Marker extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function

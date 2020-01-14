@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { COLORS, easyMove } from "../../style-constants";
+import { COLORS } from "../../../style-constants";
 
-const MarkerStyled = styled.div`
-  position: relative;
+const MarkerInGroupStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 36px;
   height: 36px;
+  margin-left: -7px;
   font-size: 14px;
   color: #fff;
   text-transform: uppercase;
@@ -16,12 +16,6 @@ const MarkerStyled = styled.div`
   background-color: ${COLORS.gray64};
   background-size: cover;
   background-position: center;
-  transition: transform 0.3s;
-  animation: ${easyMove} 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
 `;
 
-export default MarkerStyled;
+export default MarkerInGroupStyled;

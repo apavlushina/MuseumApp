@@ -7,10 +7,10 @@ import ClusterMarker from "../ClusterMarker";
 // import key from "../../key";
 
 import mapStyles from "./mapStyles.json";
-import { susolvkaCoords } from "../../fakeData";
+import { susolvkaCoords } from "../../../fakeData";
 
 import { connect } from "react-redux";
-import { getMuseums, setMuseum } from "../../actions/markers";
+import { getMuseums, setMuseum } from "../../../actions/markers";
 
 import MapWrapper from "./MapWrapper";
 import MyHeader from "./MyHeader";
