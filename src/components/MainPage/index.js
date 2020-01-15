@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import MapWrapper from "./MapWrapper";
 import MyHeader from "./MyHeader";
@@ -18,7 +19,9 @@ export class MainPage extends React.PureComponent {
           web-page just in case :)
         </p>
         <button>Check the list of all museums</button>
-        <button>See the map</button>
+        <button>
+          <Link to={`/map`}>See the map</Link>
+        </button>
         <button>Log in and customize your map!</button>
       </MapWrapper>
     );
