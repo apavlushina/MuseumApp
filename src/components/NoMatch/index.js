@@ -24,10 +24,10 @@ export default function Notfound() {
       <MyHeader>museum/kaart\nl on the map</MyHeader>
 
       <lottie-player
-        src="https://assets3.lottiefiles.com/packages/lf20_552kX6.json"
-        style={style}
+        src="https://assets5.lottiefiles.com/temp/lf20_dzWAyu.json"
         background="transparent"
         speed="1"
+        style={style}
         loop
         autoplay
       ></lottie-player>
