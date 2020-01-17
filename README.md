@@ -32,11 +32,13 @@
 
 ## Front-end Technologies Used
 
-#### [styled-components](https://www.styled-components.com/) , for styling
+#### [styled-components](https://www.styled-components.com/), for styling
 
-#### [google-map-react](https://github.com/google-map-react/google-map-react) , for map
+#### [google-map-react](https://github.com/google-map-react/google-map-react), for map
 
-#### [superclaster](https://github.com/Tim152/clustering-google-map-react) , for markers clustering
+#### [superclaster](https://github.com/Tim152/clustering-google-map-react), for markers clustering
+
+#### [lottie-player](https://lottiefiles.com/web-player), for 404 page
 
 #### And Google-Maps API and Google-Geocode API
 
