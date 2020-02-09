@@ -11,10 +11,10 @@ export function setMuseums(museums) {
   };
 }
 
-const baseUrl = "http://localhost:4000";
+// const baseUrl = "http://localhost:4000";
+const baseUrl = "https://fathomless-taiga-66915.herokuapp.com";
 
 export const getMuseums = () => (dispatch, getState) => {
-  console.log("start fetch");
   request(`${baseUrl}/museums`)
     .then(response => {
       console.log("response", response);
